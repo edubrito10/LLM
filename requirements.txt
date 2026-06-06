@@ -1,0 +1,26 @@
+# LupaLiterária — Dependências Python
+# Instala com: pip install -r requirements.txt
+
+# Interface
+streamlit>=1.35.0
+
+# Extração de documentos
+pymupdf>=1.24.0          # PDF  (import fitz)
+python-docx>=1.1.0       # Word (.docx)
+
+# RAG / LLM / Embeddings (via Ollama)
+langchain>=0.2.0
+langchain-community>=0.2.0
+langchain-ollama>=0.1.0
+
+# Vector store local (sem servidor externo)
+chromadb>=0.5.0
+
+# Tradução offline EN→PT (MarianMT)
+transformers>=4.40.0
+sentencepiece>=0.2.0
+torch>=2.2.0             # instala a versão CUDA para usar a RTX 3060:
+                         # pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+# Exportação PDF
+fpdf2>=2.7.9
