@@ -1,13 +1,3 @@
-"""
-app.py
-------
-LupaLiterária — Sistema Avançado de Análise RAG Local
-Ponto de entrada principal da aplicação Streamlit.
-
-Executa com:
-    streamlit run app.py
-"""
-
 import time
 import streamlit as st
 

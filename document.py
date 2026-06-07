@@ -1,11 +1,3 @@
-"""
-document.py
------------
-Extração de texto a partir de ficheiros PDF e Word (.docx),
-e divisão do texto em chunks com overlap para o pipeline RAG.
-"""
-
-
 def extract_text(file_bytes: bytes, filename: str) -> str:
     """
     Extrai texto de um ficheiro PDF ou Word.

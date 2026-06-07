@@ -1,10 +1,3 @@
-"""
-models.py
----------
-Carregamento centralizado e cacheado de todos os modelos usados no LupaLiterária.
-Usar @st.cache_resource garante que os modelos só são carregados uma vez por sessão.
-"""
-
 import streamlit as st
 
 

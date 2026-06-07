@@ -1,10 +1,3 @@
-"""
-keywords.py
------------
-Extração automática de palavras-chave e conceitos técnicos relevantes
-a partir do texto do documento, usando o LLM local.
-"""
-
 import re
 import json
 

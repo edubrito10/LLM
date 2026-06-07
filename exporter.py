@@ -1,11 +1,3 @@
-"""
-exporter.py
------------
-Geração de um relatório PDF com os resultados da análise:
-resumo executivo, palavras-chave e histórico de chat.
-Usa fpdf2 (biblioteca local, sem dependências externas).
-"""
- 
 import time
  
  

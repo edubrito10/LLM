@@ -1,11 +1,3 @@
-"""
-translator.py
--------------
-Tradução automática de Inglês para Português usando o modelo
-Helsinki-NLP/opus-mt-en-pt (MarianMT) — funciona 100% offline
-após o primeiro download (~300 MB, guardado em cache local).
-"""
-
 import re
 
 

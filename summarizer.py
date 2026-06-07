@@ -1,10 +1,3 @@
-"""
-summarizer.py
--------------
-Geração de resumos executivos do documento carregado,
-com extensão ajustável (curto / médio / longo).
-"""
- 
 # Número máximo de palavras do documento a enviar ao LLM
 _MAX_WORDS = 3000
  

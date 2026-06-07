@@ -1,11 +1,3 @@
-"""
-vectorstore.py
---------------
-Construção e consulta do índice vetorial local usando ChromaDB.
-Os embeddings são gerados via Ollama (nomic-embed-text) e armazenados
-numa coleção em memória — sem necessidade de servidor externo.
-"""
-
 COLLECTION_NAME = "lupa_docs"
 
 
