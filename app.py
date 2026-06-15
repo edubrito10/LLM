@@ -3,13 +3,13 @@ import streamlit as st
 
 # ─── PAGE CONFIG (tem de ser o primeiro comando Streamlit) ────────────────────
 st.set_page_config(
-    page_title="LupaLiterária",
+    page_title="LocaLLM Docs",
     page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# ─── MÓDULOS LOCAIS ───────────────────────────────────────────────────────────
+# modulos locais
 from models import load_embeddings, load_llm, load_translation_model, check_ollama
 from document import extract_text, chunk_text
 from vectorstore import build_vectorstore
@@ -19,7 +19,7 @@ from keywords import extract_keywords
 from translator import translate_en_to_pt
 from exporter import build_pdf_report
 
-# ─── ESTILOS ──────────────────────────────────────────────────────────────────
+# style
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap');
@@ -108,15 +108,15 @@ hr { border-color: var(--border) !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# ─── HEADER ───────────────────────────────────────────────────────────────────
+# header
 st.markdown("""
 <div class="lupa-header">
-    <h1 class="lupa-title">🔍 LupaLiterária</h1>
-    <p class="lupa-subtitle">Sistema Avançado de Análise RAG Local · Offline · Privado</p>
+    <h1 class="lupa-title">🔍 LocaLLM Docs</h1>
+    <p class="lupa-subtitle">Sistema Avançado de Análise RAG Local · Offline</p>
 </div>
 """, unsafe_allow_html=True)
 
-# ─── SESSION STATE ────────────────────────────────────────────────────────────
+# session state
 for key, default in {
     "doc_text": None,
     "doc_filename": None,
@@ -128,7 +128,7 @@ for key, default in {
     if key not in st.session_state:
         st.session_state[key] = default
 
-# ─── SIDEBAR ──────────────────────────────────────────────────────────────────
+# sidebar
 with st.sidebar:
     st.markdown("### ⚙️ Configuração")
 
@@ -148,7 +148,7 @@ with st.sidebar:
     )
 
     chunk_size = st.slider("Tamanho do chunk (palavras)", 200, 800, 500, 50)
-    top_k      = st.slider("Chunks relevantes para RAG (k)", 2, 8, 4)
+    top_k      = st.slider("Chunks relevantes para RAG (k)", 2, 8, 6)
 
     process_btn = st.button("🚀 Processar Documento", use_container_width=True)
 
@@ -169,7 +169,7 @@ with st.sidebar:
         n_turns = len(st.session_state.chat_history) // 2
         st.markdown(f'<span class="status-ok">✅ {n_turns} perguntas feitas</span>', unsafe_allow_html=True)
 
-# ─── PROCESSAR DOCUMENTO ──────────────────────────────────────────────────────
+# processar documento
 if process_btn and uploaded_file:
     with st.spinner("A processar documento… Por favor aguarda."):
         try:
@@ -199,13 +199,13 @@ if process_btn and uploaded_file:
         except Exception as e:
             st.error(f"Erro ao processar documento: {e}")
 
-# ─── TABS PRINCIPAIS ──────────────────────────────────────────────────────────
+# tabs principais
 if st.session_state.doc_text:
     tab_chat, tab_summary, tab_keywords, tab_export = st.tabs([
         "💬 Chat RAG", "📋 Resumo", "🏷️ Palavras-Chave", "📥 Exportar",
     ])
 
-    # ── CHAT ──────────────────────────────────────────────────────────────────
+    # chat
     with tab_chat:
         st.markdown("#### 💬 Dialoga com o Documento")
         st.markdown(f'<span class="status-ok">📄 {st.session_state.doc_filename}</span>', unsafe_allow_html=True)
@@ -221,7 +221,7 @@ if st.session_state.doc_text:
             else:
                 st.markdown(f"""
                 <div class="chat-assistant">
-                    <div class="chat-label label-assistant">🤖 LupaLiterária</div>
+                    <div class="chat-label label-assistant">🤖 LocaLLM Docs</div>
                     {msg["content"]}
                 </div>""", unsafe_allow_html=True)
                 if msg.get("sources"):
@@ -274,7 +274,7 @@ if st.session_state.doc_text:
                 st.session_state.chat_history = []
                 st.rerun()
 
-    # ── RESUMO ────────────────────────────────────────────────────────────────
+    # resumo
     with tab_summary:
         st.markdown("#### 📋 Sumarização Automática")
 
@@ -301,7 +301,7 @@ if st.session_state.doc_text:
             st.markdown(st.session_state.summary)
             st.markdown('</div>', unsafe_allow_html=True)
 
-    # ── PALAVRAS-CHAVE ────────────────────────────────────────────────────────
+    # keywords
     with tab_keywords:
         st.markdown("#### 🏷️ Extração de Palavras-Chave")
 
@@ -320,7 +320,7 @@ if st.session_state.doc_text:
             pills = "".join(f'<span class="kw-pill">{kw}</span>' for kw in st.session_state.keywords)
             st.markdown(f'<div class="feature-card">{pills}</div>', unsafe_allow_html=True)
 
-    # ── EXPORTAR ──────────────────────────────────────────────────────────────
+    # exportar
     with tab_export:
         st.markdown("#### 📥 Exportar Relatório de Análise")
         st.markdown("Gera um PDF com o resumo, palavras-chave e histórico de chat.")
@@ -349,7 +349,7 @@ if st.session_state.doc_text:
                     except Exception as e:
                         st.error(f"Erro ao gerar PDF: {e}")
 
-# ─── EMPTY STATE ──────────────────────────────────────────────────────────────
+# empty state
 else:
     st.markdown("""
     <div style="text-align:center; padding: 3rem 2rem; color: #a7a9be;">

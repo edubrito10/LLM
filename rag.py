@@ -10,7 +10,7 @@ def rag_answer(
     k: int = 4,
 ) -> tuple[str, list[str]]:
     """
-    Responde a uma pergunta usando RAG sobre o documento indexado.
+    Responde a uma pergunta usando RAG sobre o documento indexado
  
     O contexto é recuperado do vectorstore e incluído no prompt junto
     com as últimas trocas do histórico de conversa.

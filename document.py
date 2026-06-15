@@ -10,7 +10,7 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
         Texto extraído como string.
 
     Raises:
-        ValueError: se o formato não for suportado.
+        ValueError: se o formato não for suportado
     """
     if filename.lower().endswith(".pdf"):
         return _extract_pdf(file_bytes)

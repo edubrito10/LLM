@@ -43,6 +43,6 @@ def translate_en_to_pt(text: str, tokenizer, model) -> str:
 
 
 def _split_sentences(text: str) -> list[str]:
-    """Divide o texto em frases usando pontuação como delimitador."""
+    """Divide o texto em frases usando pontuação como delimitador"""
     sentences = re.split(r'(?<=[.!?])\s+', text)
     return [s.strip() for s in sentences if s.strip()]

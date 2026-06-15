@@ -35,7 +35,7 @@ LISTA JSON:"""
 
 
 def _parse_keywords(raw: str, n: int) -> list[str]:
-    """Tenta extrair uma lista de strings do output do LLM."""
+    """Tenta extrair uma lista de strings do output do LLM"""
     # Tentativa 1: JSON direto
     match = re.search(r'\[.*?\]', raw, re.DOTALL)
     if match:

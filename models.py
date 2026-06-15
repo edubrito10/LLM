@@ -3,7 +3,7 @@ import streamlit as st
 
 @st.cache_resource(show_spinner=False)
 def load_embeddings(model_name: str = "nomic-embed-text"):
-    """Carrega o modelo de embeddings via Ollama."""
+    """Carrega o modelo de embeddings via Ollama"""
     from langchain_ollama import OllamaEmbeddings
     return OllamaEmbeddings(model=model_name)
 

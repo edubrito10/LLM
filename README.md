@@ -1,4 +1,4 @@
-# 🔍 LupaLiterária — Setup & Execução
+# 🔍 LocaLLM Docs — Setup & Execução
 
 ## Estrutura do Projeto
 ```
@@ -63,23 +63,3 @@ streamlit run app.py
 Abre no browser em: **http://localhost:8501**
 
 ---
-
-## Entrega (ZIP para Moodle)
-```
-lupa_literaria.zip
-├── app.py
-├── models.py
-├── document.py
-├── vectorstore.py
-├── rag.py
-├── summarizer.py
-├── keywords.py
-├── translator.py
-├── exporter.py
-├── requirements.txt
-└── relatorio/
-    ├── relatorio.tex
-    └── relatorio.pdf
-```
-
-⚠️ **NÃO incluir** os modelos LLM (`~/.ollama`) nem os modelos HuggingFace (`~/.cache/huggingface`)

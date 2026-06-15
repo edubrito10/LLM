@@ -49,7 +49,7 @@ def _safe(text: str) -> str:
 def _add_title_block(pdf, filename: str) -> None:
     pdf.set_font("Helvetica", "B", 20)
     pdf.set_text_color(30, 30, 60)
-    pdf.cell(0, 12, "LupaLiteraria - Relatorio de Analise", ln=True)
+    pdf.cell(0, 12, "LocaLLM Docs - Relatorio de Analise", ln=True)
  
     pdf.set_font("Helvetica", "", 10)
     pdf.set_text_color(120, 120, 120)

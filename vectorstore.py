@@ -3,7 +3,7 @@ COLLECTION_NAME = "lupa_docs"
 
 def build_vectorstore(chunks: list[str], embeddings):
     """
-    Cria uma coleção ChromaDB em memória e indexa todos os chunks.
+    Cria uma coleção ChromaDB em memória e indexa todos os chunks
 
     Args:
         chunks:     lista de strings (chunks do documento)

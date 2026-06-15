@@ -10,7 +10,7 @@ _LENGTH_DESCRIPTIONS = {
  
 def summarize(text: str, llm, length: str = "médio") -> str:
     """
-    Gera um resumo executivo do documento em português europeu.
+    Gera um resumo executivo do documento em português europeu
  
     Args:
         text:   texto completo do documento
