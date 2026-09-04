@@ -211,6 +211,7 @@ if st.session_state.doc_text:
         st.markdown(f'<span class="status-ok">📄 {st.session_state.doc_filename}</span>', unsafe_allow_html=True)
         st.markdown("")
 
+        #o código lê a memória e desenha os balões personalizados no ecrã
         for msg in st.session_state.chat_history:
             if msg["role"] == "user":
                 st.markdown(f"""
@@ -231,7 +232,8 @@ if st.session_state.doc_text:
                                 f'<div class="source-snippet"><b>Fonte {i}:</b> {src[:300]}…</div>',
                                 unsafe_allow_html=True,
                             )
-
+        
+        # Uso de um form com clear_on_submit=True para limpar a caixa automaticamente após o envio.
         with st.form("chat_form", clear_on_submit=True):
             user_input = st.text_area(
                 "A tua pergunta",

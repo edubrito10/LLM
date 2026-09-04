@@ -1,6 +1,7 @@
-# Número máximo de palavras do documento a enviar ao LLM
+# Limite de segurança para não esgotar a memória/contexto do LLM
 _MAX_WORDS = 3000
  
+# Dicionário que dita o comportamento do LLM dependendo do tamanho escolhido
 _LENGTH_DESCRIPTIONS = {
     "curto": "3 a 4 frases concisas que capturem a essência do documento",
     "médio": "2 a 3 parágrafos bem estruturados, cobrindo objetivos, metodologia e conclusões",
@@ -10,20 +11,20 @@ _LENGTH_DESCRIPTIONS = {
  
 def summarize(text: str, llm, length: str = "médio") -> str:
     """
-    Gera um resumo executivo do documento em português europeu
- 
-    Args:
-        text:   texto completo do documento
-        llm:    modelo de linguagem (Ollama)
-        length: extensão desejada — "curto", "médio" ou "longo"
- 
-    Returns:
-        Resumo gerado como string.
+    Esta função prepara o 'terreno'. Vai buscar o nível de detalhe exigido,
+    limpa a bibliografia do texto original, garante que o tamanho não excede
+    o limite da placa gráfica e cria um Prompt rigoroso para forçar o LLM
+    a fazer um resumo focado e sem invenções.
     """
     detail = _LENGTH_DESCRIPTIONS.get(length, _LENGTH_DESCRIPTIONS["médio"])
+    
+    # 1. Limpa o lixo (Referências)
     clean  = _remove_references(text)
+    
+    # 2. Garante que não passa das 3000 palavras
     excerpt = _truncate(clean, _MAX_WORDS)
  
+    # 3. O 'System Prompt' super restritivo para garantir qualidade
     prompt = f"""És um especialista em síntese académica. \
 Com base no seguinte texto, gera um resumo executivo em português europeu \
 com {detail}. O resumo deve capturar os objetivos principais, \
@@ -37,13 +38,16 @@ TEXTO:
  
 RESUMO EXECUTIVO:"""
  
+    # 4. Devolve a resposta final limpa
     return llm.invoke(prompt).strip()
  
  
 def _remove_references(text: str) -> str:
     """
-    Remove secções de referências bibliográficas, declarações de uso de IA
-    e notas de rodapé do texto antes de o enviar ao LLM.
+    Usa Expressões Regulares para procurar a secção da Bibliografia.
+    Assim que encontra a palavra "Referências" ou "References", corta 
+    literalmente o documento a meio e descarta o resto. Impede que o LLM
+    perca o seu tempo e tokens a tentar resumir fontes de pesquisa.
     """
     import re
     # Padrões comuns de início de secção de referências (PT e EN)
@@ -56,13 +60,19 @@ def _remove_references(text: str) -> str:
     ]
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
+        # Se encontrou um destes cabeçalhos, corta o texto desde o início até aí
         if match:
             text = text[:match.start()]
+            
     return text.strip()
  
  
 def _truncate(text: str, max_words: int) -> str:
-    """Limita o texto a um número máximo de palavras."""
+    """
+    Se o documento (mesmo depois de limpo) for demasiado longo, 
+    corta o texto para caber nos limites lógicos do modelo de IA local,
+    anexando uma nota para indicar que houve corte.
+    """
     words = text.split()
     if len(words) <= max_words:
         return text
